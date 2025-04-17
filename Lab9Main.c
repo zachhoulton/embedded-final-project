@@ -21,6 +21,7 @@
 #include "Sound.h"
 #include "images/images.h"
 #include "images/newimages.h"
+#include "../inc/JoyStick.h"
 
 
 // #include "../inc/JoyStick.c"
@@ -139,8 +140,43 @@ int main1(void){ // main1
   }
 }
 
+int main(void){ // main3
+  __disable_irq();
+  PLL_Init(); // set bus speed
+  LaunchPad_Init();
+  Switch_Init(); // initialize switches
+  LED_Init(); // initialize LED
+
+  JoyStick_Init();
+  uint32_t xpos, ypos, buttonstate;
+  uint32_t lastX = 0, lastY = 0;
+  uint32_t lastButtonState = 1;  
+
+  while(1){
+    JoyStick_In(&xpos, &ypos);
+    buttonstate = JoyStick_InButton();
+
+    if (buttonstate == 0 && lastButtonState != 0){
+      printf("Button pressed\n");
+      lastButtonState = 0;  
+    }
+    else if (buttonstate != 0 && lastButtonState == 0){
+      printf("Button not pressed\n");
+      lastButtonState = 1; 
+    }
+
+    if ((xpos - lastX) > 0 || (ypos - lastY) > 0) {
+      printf("Joystick position - X: %u, Y: %u\n", xpos, ypos);
+      lastX = xpos;  
+      lastY = ypos;  
+    }
+
+    Clock_Delay1ms(100); 
+  }
+}
+
 // use main2 to observe graphics
-int main(void){ // main2
+int main2(void){ // main2
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
@@ -163,7 +199,8 @@ int main(void){ // main2
   // ST7735_DrawBitmap(80, 9, SmallEnemy30pointA, 16,10);
 
 
-  // ST7735_DrawBitmap(0, 159, spacey, 128,160);
+  ST7735_DrawBitmap(0, 159, spacey, 128,160);
+  // ST7735_DrawBitmap(0, 160,  blue_space, 128, 160);
   int xwingx = 15;
   int xwingy = 133;
   
@@ -185,13 +222,14 @@ int main(void){ // main2
   ST7735_DrawBitmapTransparent(xwingx, xwingy, xwing, 100,53, 0x0000,0);
 
   int32_t x = -20;
+  
   while(1){
     // SmallFont_OutVertical(t,104,6); // top left
   // Clock_Delay1ms(50);              // delay 50 msec
   // JoyStick_In(&joyx, &joyy);
   // printf("%d",joyx);
   
-// Draw lines with color 0x07C0 (for example, drawing the shot)
+// Draw lines with color 0x07C0 (for shotcenter_x-32+x%20, shotcenter_yexample, drawing the shot)
   ST7735_Line(tlcannonx, tlcannony, shotcenter_x + (double)(shotcenter_x - tlcannonx)*(double)((double)x/20), shotcenter_y + (double)(shotcenter_y - tlcannony)*(double)((double)x/20), 0x0000);
   ST7735_Line(shotcenter_x + (double)(shotcenter_x - tlcannonx)*(double)((double)x/20), shotcenter_y + (double)(shotcenter_y - tlcannony)*(double)((double)x/20), 
               shotcenter_x + (double)(shotcenter_x - tlcannonx)*(double)((double)x/40), shotcenter_y + (double)(shotcenter_y - tlcannony)*(double)((double)x/40), 0xBC1F);
@@ -209,8 +247,11 @@ int main(void){ // main2
   ST7735_Line(brcannonx, brcannony, shotcenter_x + (double)(shotcenter_x - brcannonx)*(double)((double)x/20), shotcenter_y + (double)(shotcenter_y - brcannony)*(double)((double)x/20), 0x0000);
   ST7735_Line(shotcenter_x + (double)(shotcenter_x - brcannonx)*(double)((double)x/20), shotcenter_y + (double)(shotcenter_y - brcannony)*(double)((double)x/20), 
               shotcenter_x + (double)(shotcenter_x - brcannonx)*(double)((double)x/40), shotcenter_y + (double)(shotcenter_y - brcannony)*(double)((double)x/40), 0x07C0);
-
-  ST7735_DrawBitmapPartial(0, 0, blue_space, 128, 160, 0, 0, 128, 160);
+  
+  
+  ST7735_DrawBitmap(shotcenter_x-32+x%20, shotcenter_y, star, 64,60);
+  
+  
 
 // ST7735_Line(xwingx + 5 + ((shotcenter_x - xwingx) * ((double)(x % 10) / 10)),
 //              shotcenter_y - (xwingy - 5),
