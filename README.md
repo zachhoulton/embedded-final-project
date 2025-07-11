@@ -17,10 +17,10 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 | Component         | Function                         |
 |-------------------|----------------------------------|
 | MSPM0 LaunchPad   | Core game logic + peripherals    |
-| ST7735 TFT Display| Real-time 3D rendering           |
+| ST7735 TFT        | Real-time 3D rendering           |
 | Joystick          | Pitch/yaw aiming control         |
 | 3 Switches        | Fire, Boost, Recenter            |
-| DAC Output        | Sound FX (shots, explosion)      |
+| DAC Audio Jack    | Sound FX (shots, explosion)      |
 
 ---
 
