@@ -75,7 +75,3 @@ The multiplayer system is currently **commented out** due to performance constra
 ## Authors
 
 Zachary Houlton and Ariv Mondal 
-
-Embedded Systems - Spring 2025  
-
-The University of Texas at Austin
