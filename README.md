@@ -47,6 +47,10 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 
 
 
+https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
+
+
+
 
 ---
 
@@ -70,7 +74,7 @@ The game includes a functional UART protocol for syncing position data between t
 - Framing and decoding logic
 - A **handshake protocol** at startup to ensure both devices are ready before beginning the game
 
-Although the multiplayer system was implemented and tested, it is currently **commented out** due to performance constraints.
+The multiplayer system is currently **commented out** due to performance constraints.
 
 ## Authors
 
