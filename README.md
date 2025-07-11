@@ -15,9 +15,12 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 ## Demo Video
 
 
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d" width="480" controls>
+    Your browser does not support the video tag.
+  </video>
+</p>
 
-
-https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 
 
 
@@ -26,9 +29,9 @@ https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/3b6b05e1-2152-463c-9fbe-55ba1b2330a8" width="300"/>
-<img src="https://github.com/user-attachments/assets/9dc55e49-64fc-403b-907c-cd5a90c6c808" width="300"/>
-<img src="https://github.com/user-attachments/assets/056cf527-dd8e-4c2b-b302-01a785d71203" width="300"/>
+<img src="https://github.com/user-attachments/assets/3b6b05e1-2152-463c-9fbe-55ba1b2330a8" width="250"/>
+<img src="https://github.com/user-attachments/assets/9dc55e49-64fc-403b-907c-cd5a90c6c808" width="250"/>
+<img src="https://github.com/user-attachments/assets/056cf527-dd8e-4c2b-b302-01a785d71203" width="250"/>
 
 
 ---
