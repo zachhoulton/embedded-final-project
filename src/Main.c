@@ -52,11 +52,6 @@ volatile uint8_t boostflag = 0;
 
 int fighter = 0;
 
-////////////////////////////////
-int aiFrameCounter = 0;
-const int AI_UPDATE_INTERVAL = 5;
-////////////////////////////////
-
 void GROUP1_IRQHandler(void){
   if(GPIOB->CPU_INT.RIS & (1<<4)){
     primaryflag = 1;
@@ -294,7 +289,7 @@ void GameOver(uint8_t playerHealth) {
     for (int i = 0; lines[i] != NULL; i++) {
       int y = (startRow - scroll) + i * 2;
 
-      //Stop the scrolling when it reaches the static row
+      // Stop the scrolling when it reaches the static row
       if (y >= staticRow) {
         ST7735_DrawString(1, y, (char*)lines[i], color);
       }
@@ -333,73 +328,6 @@ void SpriteCheck(int8_t choose){
     }
 }
 
-////////////////////////////////////////////////////
-void AI_FireAtPlayer(void) {
-    float dx = cam.x - opponent.x;
-    float dy = cam.y - opponent.y;
-    float dz = cam.z - opponent.z;
-
-    float dist = sqrtf(dx*dx + dy*dy + dz*dz);
-    if (dist < 250.0f) { // only fire if within range
-        float aimThreshold = 0.95f;
-
-        // Vector from AI to player (normalized)
-        float vx = dx / dist;
-        float vz = dz / dist;
-
-        // AI's forward vector
-        float fx = sinf(opponent.yaw);
-        float fz = cosf(opponent.yaw);
-
-        float dot = fx * vx + fz * vz;
-
-        if (dot > aimThreshold) {
-            // Deal damage
-            if (cam.health > 0) {
-                cam.health -= 10;
-                HealthBar_Update(cam.health);
-
-                if (cam.health == 0) {
-                    Sound_explode();
-                    GameOver(cam.health);
-                    mainmenu();
-                }
-            }
-        }
-    }
-}
-//////////////////////////////////////////
-//////////////////////////////////////////
-void AI_Update(void) {
-    // Vector from AI to player
-    float dx = cam.x - opponent.x;
-    float dy = cam.y - opponent.y;
-    float dz = cam.z - opponent.z;
-
-    float d2 = dx*dx + dy*dy + dz*dz;
-
-    // Only move if far enough away
-    if (d2 > MIN_SEP2 * 1.2f) {
-        float dist = sqrtf(d2);
-        float moveSpeed = 1.0f;  // slower than player
-
-        opponent.x += (dx / dist) * moveSpeed;
-        opponent.y += (dy / dist) * moveSpeed;
-        opponent.z += (dz / dist) * moveSpeed;
-    }
-
-    // Aim at the player
-    opponent.yaw = atan2f(cam.x - opponent.x, cam.z - opponent.z);
-
-    // Occasionally fire a shot at the player
-    static int shotCooldown = 0;
-    if (--shotCooldown <= 0) {
-        AI_FireAtPlayer();
-        shotCooldown = 50; // Wait 50 frames between shots
-    }
-}
-////////////////////////////////////////////////////
-
 int maingame(int fighter) {
     // hardware init
     Sound_Init();
@@ -420,12 +348,7 @@ int maingame(int fighter) {
     int16_t rx_z = (int16_t)cam.z;
 
     while (1) {
-        ////////////////////////////////////////////
-        if (++aiFrameCounter >= AI_UPDATE_INTERVAL) {
-          aiFrameCounter = 0;
-          AI_Update();
-        }
-        /////////////////////////////////////////////
+      
         int joy = readjoystick();
         if      (joy == 8)  cam.pitch -= PITCH_STEP;
         else if (joy == 2)  cam.pitch += PITCH_STEP;
@@ -494,14 +417,6 @@ int maingame(int fighter) {
         float fy = -sinf(cam.pitch);
         float fz =  cosf(cam.yaw) * cosf(cam.pitch);
 
-        // cam.x = opponent.x - fx * RECENTER_DIST;
-        // cam.y = opponent.y - fy * RECENTER_DIST;
-        // cam.z = opponent.z - fz * RECENTER_DIST;
-
-        // cam.x = fmaxf(fminf(cam.x, HALF_WORLD), -HALF_WORLD);
-        // cam.y = fmaxf(fminf(cam.y, HALF_WORLD), -HALF_WORLD);
-        // cam.z = fmaxf(fminf(cam.z, HALF_WORLD), -HALF_WORLD);
-
         float d2 = (cam.x - opponent.x)*(cam.x - opponent.x)
                 + (cam.y - opponent.y)*(cam.y - opponent.y)
                 + (cam.z - opponent.z)*(cam.z - opponent.z);
@@ -516,17 +431,6 @@ int maingame(int fighter) {
     }
     prevSw = curSw;
 }
-
-    // {
-    // static uint8_t prevSw = 0;
-    // uint8_t curSw = Switch_In() & 0x02;   
-    // if (curSw && !prevSw) {               //rising edge only
-    //     cam.yaw   = 0.0f;                 //face +Z
-    //     cam.pitch = 0.0f;                 //level
-    // }
-    // prevSw = curSw;
-    // }
-
 
        ST7735_FillRect(0, 16, LCD_W, LCD_H - 16, ST7735_BLACK);
        ST7735_DrawBitmapTransparent(59, 85, crosshair, 11, 11, ST7735_WHITE, 0);
