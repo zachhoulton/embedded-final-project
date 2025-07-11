@@ -32,21 +32,10 @@ https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 | Component         | Function                         |
 |-------------------|----------------------------------|
 | MSPM0 LaunchPad   | Core game logic                  |
-| ST7735 Display    | 3D rendering                     |
+| ST7735 LED        | Display                          |
 | Joystick          | Pitch/yaw aiming control         |
 | 3 Switches        | Fire, Boost, Recenter            |
 | DAC Audio Jack    | Sound FX (shots, explosion)      |
-
----
-
-## Controls
-
-| Control           | Action                     |
-|-------------------|----------------------------|
-| **Joystick**      | Aim                        |
-| **Left Button**   | Fire lasers                |
-| **Middle Button** | Re-center aim on opponent  |
-| **Right Button**  | Boost forward              |
 
 ---
 
@@ -55,10 +44,10 @@ https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 - 3D starfield rendering
 - Real-time sprite projection
 - Directional aiming + boost movement
-- Player selection screen (X-Wing or TIE Fighter)
-- Dual-language menus (English / Español)
+- Player selection screen
+- Dual-language menu
 - Health bar + win/lose end screen
-- Sound effects(DAC)
+- Sound effects (DAC)
 - **(Experimental)** Multiplayer using UART communication
 
 ---
