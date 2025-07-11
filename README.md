@@ -14,16 +14,7 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 
 ## Demo Video
 
-
-<p align="center">
-  <video src="https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d" width="480" controls>
-    Your browser does not support the video tag.
-  </video>
-</p>
-
-
-
-
+https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 
 ---
 
@@ -84,5 +75,7 @@ The multiplayer system is currently **commented out** due to performance constra
 ## Authors
 
 Zachary Houlton and Ariv Mondal 
+
 Embedded Systems - Spring 2025  
+
 The University of Texas at Austin
