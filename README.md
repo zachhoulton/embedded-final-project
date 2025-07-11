@@ -31,8 +31,8 @@ https://github.com/user-attachments/assets/56fe94dd-2f6c-4483-828e-f5687942c90d
 
 | Component         | Function                         |
 |-------------------|----------------------------------|
-| MSPM0 LaunchPad   | Core game logic + peripherals    |
-| ST7735 TFT        | Real-time 3D rendering           |
+| MSPM0 LaunchPad   | Core game logic                  |
+| ST7735 Display    | 3D rendering                     |
 | Joystick          | Pitch/yaw aiming control         |
 | 3 Switches        | Fire, Boost, Recenter            |
 | DAC Audio Jack    | Sound FX (shots, explosion)      |
