@@ -58,7 +58,7 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 - Player selection screen (X-Wing or TIE Fighter)
 - Dual-language menus (English / Español)
 - Health bar + win/lose end screen
-- Retro-style audio FX (DAC)
+- Sound effects(DAC)
 - **(Experimental)** Multiplayer using UART communication
 
 ---
@@ -66,13 +66,13 @@ All rendering, controls, sound, and gameplay are implemented using low-level emb
 ## Multiplayer
 
 The game includes a functional UART protocol for syncing position data between two MSPM0 boards.  
-- Custom 8-byte float encoding
-- Bidirectional sync using UART1 and UART2
-- Multiplayer startup code is present but disabled
+- 8-byte float encoding for transmitting x, y, and z coordinates
+- Framing and decoding logic
+- A **handshake protocol** at startup to ensure both devices are ready before beginning the game
 
-> Multiplayer logic is included in the codebase for demo/testing purposes, but is **not fully operational**.
+Although the multiplayer system was implemented and tested, it is currently **commented out** due to performance constraints.
 
-## 👨‍💻 Authors
+## Authors
 
 Zachary Houlton and Ariv Mondal 
 Embedded Systems - Spring 2025  
