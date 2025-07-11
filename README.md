@@ -7,8 +7,8 @@ A 3D Aerial Combat Game for the MSPM0
 
 ## Overview
 
-**Starfighter** is a 3D space shooter inspired by *Star Wars*, built from scratch on the MSPM0 microcontroller platform.  
-All rendering, controls, sound, and gameplay are implemented using low-level embedded C — no external game engine required.
+**Starfighter** is a 3D space shooter inspired by Star Wars, built from scratch on the MSPM0 microcontroller.  
+All rendering, controls, sound, and gameplay are implemented using embedded C, meaning no external game engine is required.
 
 ---
 
